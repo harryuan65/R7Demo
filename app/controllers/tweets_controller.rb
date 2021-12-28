@@ -24,9 +24,13 @@ class TweetsController < ApplicationController
 
     respond_to do |format|
       if @tweet.save
-        format.html { redirect_to tweet_url(@tweet), notice: 'Tweet was successfully created.' }
+        format.html { redirect_to tweets_url, notice: 'Tweet was successfully created.' }
         format.json { render :show, status: :created, location: @tweet }
       else
+        # turbo_stream is responding to the ajax request from turbo_frame_tag
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace('tweet_form', partial: 'tweets/form', locals: { tweet: @tweet })
+        end
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @tweet.errors, status: :unprocessable_entity }
       end
@@ -51,6 +55,7 @@ class TweetsController < ApplicationController
     @tweet.destroy
 
     respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@tweet) }
       format.html { redirect_to tweets_url, notice: 'Tweet was successfully destroyed.' }
       format.json { head :no_content }
     end

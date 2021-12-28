@@ -2,7 +2,10 @@
 
 <h1>Add a tweet</h1>
 
-<%= render 'tweets/form', tweet: @tweet %>
+<%# After wrapping with turbo frame, it submits the form using ajax for us. It also expects a turbo_stream response %>
+<%= turbo_frame_tag 'tweet_form' do %>
+  <%= render 'tweets/form', tweet: @tweet %>
+<% end %>
 
 <h1>Tweets</h1>
 
