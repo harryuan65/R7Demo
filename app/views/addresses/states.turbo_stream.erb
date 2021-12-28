@@ -1,0 +1,4 @@
+<%# We don't want to update turbo stream using classes, since it updates all elements with that class, instead we specify a "target" %>
+<%= turbo_stream.update @target do %>
+  <%= options_for_select @states %>
+<% end %>
