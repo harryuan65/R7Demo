@@ -1,0 +1,63 @@
+@startuml Tweet
+actor Me as me
+participant TweetsController as controller
+participant TweetView as view
+participant Tweet as model
+participant ActionCable as cable
+
+autonumber
+group original
+  me -> controller: GET /tweets
+  controller -> view: Tweet#index
+  view->me: render index.html.erb
+  note over me #222
+  <color:skyblue>form
+  <color:skyblue>tweet#tweet_1
+  end note
+  me->model: 在 Rails Console 新建一筆 Tweet
+  me->controller: **手動重整** /tweets
+  controller->view: Tweet#index
+  view->me: 再次 render index.html.erb 才看得到新的 tweet
+  note over me #222
+  <color:skyblue>form
+  <color:skyblue>tweet#tweet_1
+  <color:skyblue>tweet#tweet_2
+  end note
+end
+
+autonumber "<b>(0)"
+group turbo stream
+  me -> controller: GET /tweets
+  controller -> view: Tweet#index
+  view->me: render index.html.erb
+  note over me #222
+  <color:skyblue>form
+  <color:orchid>**turbo_stream_from** <color:orange>"tweets" <color:orchid>do
+  <color:skyblue>  tweet#tweet_1
+  <color:orchid>end
+  end note
+  me->cable: connect, 監聽 "tweets"
+  me->model: 在 Rails Console 新建一筆 Tweet
+  activate cable
+  model->cable: 觸發 broadcast_append_to "tweets"
+  cable->me: 產生 tweet partial 資料並廣播到 "tweets"
+  note over controller
+  <turbo-stream action="prepend" target="tweets">
+  <template><turbo-frame id="tweet">
+  <div id="**tweet_2**" class="card">
+  <p><strong>Body:</strong>Test for stream</p>
+  <p><strong>Likes count:</strong></p>
+  <p><strong>Retweets count:</strong>
+   ... (via streamed from tweets)
+  end note
+  me->me: hotwire 配對 turbo-stream 標籤 "tweets"，並將 "tweet_2" prepend 至其中
+  note over me #222
+  <color:skyblue>form
+  <color:orchid>**turbo_stream_from** <color:orange>"tweets" <color:orchid>do
+  <color:skyblue>  tweet#tweet_1
+  <color:skyblue>  tweet#tweet_2  <color:orange>出現！
+  <color:orchid>end
+  end note
+  deactivate cable
+end
+@enduml
