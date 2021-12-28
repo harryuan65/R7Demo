@@ -9,4 +9,9 @@
     <%= post.content %>
   </p>
 
+  <p>
+    <%# time_tag  %>
+    <%# time-ago is used by local-time %>
+    Posted <%= time_tag post.created_at, "data-local": "time-ago" %>
+  </p>
 </div>
