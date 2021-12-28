@@ -1,24 +1,16 @@
-# README
+# Rails 7 Demo
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This Demo includes:
 
-Things you may want to cover:
+- importmap pinning
+- turbo-stream
+- mailer
 
-* Ruby version
+## Develepment
 
-* System dependencies
+```bash
+bundle install
+bundle exec rails s
+```
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Visit [http://localhost:3000](http://localhost:3000)
