@@ -1,5 +1,9 @@
 .card {
   border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 10px 30px;
+  border-radius: 10px;
+  padding: 5px 30px;
+}
+
+#tweets {
+  margin-bottom: 50px;
 }
