@@ -10,6 +10,10 @@
   </p>
 
   <p>
+   <b><%= pluralize post.comments.count, "comment" %></b>
+  </p>
+
+  <p>
     <%# time_tag  %>
     <%# time-ago is used by local-time %>
     Posted <%= time_tag post.created_at, "data-local": "time-ago" %>
