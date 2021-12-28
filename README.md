@@ -10,6 +10,7 @@ This Demo includes:
 
 ```bash
 bundle install
+bundle exec rails db:migrate
 bundle exec rails s
 ```
 
