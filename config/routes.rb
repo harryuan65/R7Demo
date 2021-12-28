@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :tweets
+  resources :tweets do
+    resources :likes
+  end
   resources :posts do
     resources :comments
   end

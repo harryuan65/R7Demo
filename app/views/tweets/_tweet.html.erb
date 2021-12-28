@@ -1,7 +1,7 @@
 <%= turbo_frame_tag tweet do%>
   <div id="<%= dom_id tweet %>" class="card">
     <p>Body:<%= tweet.body %></p>
-    <p>Likes (<%= tweet.likes_count %>)</p>
+    <%= button_to "Likes #{tweet.likes_count || 0}", tweet_likes_path(tweet) %>
     <p>Retweets (<%= tweet.retweets_count %>)</p>
     <%= link_to "Edit", edit_tweet_path(tweet) %>
     <%= button_to "X", tweet_path(tweet), method: :delete %>
