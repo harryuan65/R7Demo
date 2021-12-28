@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :addresses
   resources :tweets do
     resources :likes
   end
