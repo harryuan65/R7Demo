@@ -8,6 +8,13 @@ export default class extends Controller {
     param: String,
   };
 
+  //What if the select element does not have an id?
+  connect() {
+    if (this.selectTarget.id === "") {
+      this.selectTarget.id = Math.random().toString(16);
+    }
+  }
+
   change(event) {
     // let params = new URLSearchParams("?foo=bar")
     let params = new URLSearchParams();
