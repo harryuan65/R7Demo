@@ -3,6 +3,7 @@
     <p>Body:<%= tweet.body %></p>
     <p>Likes (<%= tweet.likes_count %>)</p>
     <p>Retweets (<%= tweet.retweets_count %>)</p>
+    <%= link_to "Edit", edit_tweet_path(tweet) %>
     <%= button_to "X", tweet_path(tweet), method: :delete %>
   </div>
 <% end %>

@@ -1,6 +1,12 @@
 <h1>Editing tweet</h1>
 
-<%= render "form", tweet: @tweet %>
+<%= turbo_frame_tag dom_id(@tweet) do %>
+  <div class="card">
+    <%= render "form", tweet: @tweet %>
+    <%# render show -> _tweet and there is a turbo_frame_tag in it %>
+    <%= link_to "Cancel", tweet_path(@tweet) %>
+  </div>
+<% end %>
 
 <br>
 
