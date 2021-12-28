@@ -11,15 +11,15 @@
     </div>
   <% end %>
 
-  <div data-controller="country">
+  <div data-controller="select" data-select-url-value="<%= states_addresses_path %>" data-select-param-value="country">
     <div>
       <%= form.label :country, style: "display: block" %>
-      <%= form.select :country, CS.countries.invert, { prompt: 'Select a country'}, { class: 'form-control', data: { action: 'change->country#change'} }%>
+      <%= form.select :country, CS.countries.invert, { prompt: 'Select a country'}, { class: 'form-control', data: { action: 'change->select#change'} }%>
     </div>
 
     <div>
       <%= form.label :state, style: "display: block" %>
-      <%= form.select :state, [], {}, { class: 'form-control', data: { country_target: 'stateSelect' } }%>
+      <%= form.select :state, [], {}, { class: 'form-control', data: { select_target: 'select' } }%>
     </div>
   </div>
   <div>
